@@ -45,6 +45,11 @@ public class PostService {
 		return repository.save(newObj);
 	}
 	
+	//Query Methods
+	public List<Post> findByTitle(String text){
+		return repository.findByTitleContainingIgnoreCase(text);
+	}
+	
 	private void updateData(Post newObj, Post obj) {
 		newObj.setBody(obj.getBody());
 		newObj.setTitle(obj.getTitle());
