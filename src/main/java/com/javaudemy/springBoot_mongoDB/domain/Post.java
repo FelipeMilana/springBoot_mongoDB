@@ -2,12 +2,15 @@ package com.javaudemy.springBoot_mongoDB.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.javaudemy.springBoot_mongoDB.dto.AuthorDTO;
+import com.javaudemy.springBoot_mongoDB.dto.CommentDTO;
 
 @Document(collection = "post")
 public class Post implements Serializable{
@@ -24,6 +27,7 @@ public class Post implements Serializable{
 	
 	//associations
 	private AuthorDTO author;
+	private List<CommentDTO> comments = new ArrayList<>();
 	
 	//standard constructor and with fields
 	public Post() {
@@ -76,6 +80,10 @@ public class Post implements Serializable{
 
 	public void setAuthorDTO(AuthorDTO author) {
 		this.author = author;
+	}
+	
+	public List<CommentDTO> getComments() {
+		return comments;
 	}
 
 	//HashCode and Equals, using only id
