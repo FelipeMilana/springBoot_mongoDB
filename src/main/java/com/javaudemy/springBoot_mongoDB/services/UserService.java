@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.javaudemy.springBoot_mongoDB.domain.Post;
 import com.javaudemy.springBoot_mongoDB.domain.User;
 import com.javaudemy.springBoot_mongoDB.dto.UserDTO;
 import com.javaudemy.springBoot_mongoDB.repositories.UserRepository;
@@ -45,6 +46,11 @@ public class UserService {
 		return repository.save(newObj);
 	}
 	
+	public void updatePostList(Post post) {
+		User user = findById(post.getAuthor().getId());
+		user.getPosts().add(post);
+		repository.save(user);
+	}
 	private void updateData(User newObj, User obj) {
 		newObj.setName(obj.getName());
 		newObj.setEmail(obj.getEmail());
