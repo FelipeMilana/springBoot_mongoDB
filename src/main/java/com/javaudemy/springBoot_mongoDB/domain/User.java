@@ -1,8 +1,11 @@
 package com.javaudemy.springBoot_mongoDB.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
@@ -16,6 +19,10 @@ public class User implements Serializable {
 	private String id;
 	private String name;
 	private String email;
+	
+	//associations
+	@DBRef(lazy = true)
+	private List<Post> posts = new ArrayList<>();
 	
 	//constructors, standard and with arguments
 	public User() {
@@ -52,6 +59,10 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	public List<Post> getPosts() {
+		return posts;
+	}
+	
 	//HashCode and Equals to compare objects
 	@Override
 	public int hashCode() {

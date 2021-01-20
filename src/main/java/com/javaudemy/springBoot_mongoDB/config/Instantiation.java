@@ -38,5 +38,12 @@ public class Instantiation implements CommandLineRunner{
 		Post post1 = new Post(null, Instant.parse("2018-08-21T00:00:00Z"), "Partiu viagem", "Vou viajar para São Paulo, abraços!", new AuthorDTO(maria));
 		Post post2 = new Post(null, Instant.parse("2018-08-23T00:00:00Z"), "Bom dia!", "Acordei feliz hoje", new AuthorDTO(maria));
 		postRepository.saveAll(Arrays.asList(post1, post2));
+		
+		maria.getPosts().addAll(Arrays.asList(post1, post2));
+		//verification if author and User is the same
+		if(maria.getId().equals(post1.getAuthor().getId()) && maria.getId().equals(post2.getAuthor().getId())) {
+			userRepository.save(maria);
+		}
+		
 	}
 }
