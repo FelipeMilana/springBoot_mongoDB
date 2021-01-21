@@ -3,13 +3,16 @@ package com.javaudemy.springBoot_mongoDB.dto;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class CommentDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	//attributes
 	private String text;
-	private Instant  date;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
+	private Instant date;
 	
 	//associations
 	private AuthorDTO author;
@@ -18,9 +21,9 @@ public class CommentDTO implements Serializable{
 	public CommentDTO() {
 	}
 	
-	public CommentDTO(String text, AuthorDTO author) {
+	public CommentDTO(String text, Instant date, AuthorDTO author) {
 		this.text =  text;
-		setDate(Instant.now());
+		this.date = date;
 		this.author = author;
 	}
 
@@ -32,11 +35,11 @@ public class CommentDTO implements Serializable{
 		this.text = text;
 	}
 
-	public Instant getDate() {
+	public Instant getInstant() {
 		return date;
 	}
 
-	public void setDate(Instant date) {
+	public void setInstant(Instant date) {
 		this.date = date;
 	}
 

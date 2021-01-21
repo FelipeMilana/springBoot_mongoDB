@@ -1,5 +1,6 @@
 package com.javaudemy.springBoot_mongoDB.config;
 
+import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +33,16 @@ public class Instantiation implements CommandLineRunner{
 		User maria = new User(null, "Maria Brown", "maria@gmail.com");
 		User alex = new User(null, "Alex Green", "alex@gmail.com");
 		User bob = new User(null, "Bob Grey", "bob@gmail.com");
+		User felipe = new User(null, "Felipe Milana", "felipe.milana@gmail.com");
 		//need to save before, because this users needs to have an own id.
-		userRepository.saveAll(Arrays.asList(maria, alex, bob));
+		userRepository.saveAll(Arrays.asList(maria, alex, bob, felipe));
 		
-		Post post1 = new Post(null,	"Partiu viagem", "Vou viajar para São Paulo, abraços!", new AuthorDTO(maria));
-		Post post2 = new Post(null, "Bom dia!", "Acordei feliz hoje", new AuthorDTO(maria));
+		Post post1 = new Post(null,	Instant.parse("2018-03-21T00:00:00Z"), "Partiu viagem", "Vou viajar para São Paulo, abraços!", new AuthorDTO(maria));
+		Post post2 = new Post(null, Instant.parse("2018-03-23T00:00:00Z"), "Bom dia!", "Acordei feliz hoje", new AuthorDTO(maria));
 		
-		CommentDTO  c1  = new CommentDTO("Boa viagem mano", new AuthorDTO(alex));
-		CommentDTO  c2  = new CommentDTO("Aproveite", new AuthorDTO(bob));
-		CommentDTO  c3  = new CommentDTO("Tenha um ótimo dia", new AuthorDTO(alex));
+		CommentDTO  c1  = new CommentDTO("Boa viagem mano", Instant.parse("2018-03-21T00:00:00Z"), new AuthorDTO(alex));
+		CommentDTO  c2  = new CommentDTO("Aproveite", Instant.parse("2018-03-22T00:00:00Z"), new AuthorDTO(bob));
+		CommentDTO  c3  = new CommentDTO("Tenha um ótimo dia", Instant.parse("2018-03-23T00:00:00Z"), new AuthorDTO(alex));
 		
 		post1.getComments().addAll(Arrays.asList(c1, c2));
 		post2.getComments().add(c3);

@@ -51,6 +51,10 @@ public class PostService {
 		return repository.searchTitle(text);
 	}
 	
+	public List<Post> fullSearch(String text, Instant minDate, Instant maxDate){
+		return repository.fullSearch(text, minDate, maxDate);
+	}
+	
 	private void updateData(Post newObj, Post obj) {
 		newObj.setBody(obj.getBody());
 		newObj.setTitle(obj.getTitle());
