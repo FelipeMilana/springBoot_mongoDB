@@ -27,6 +27,7 @@ public class CommentDTO implements Serializable{
 		this.author = author;
 	}
 
+	
 	public String getText() {
 		return text;
 	}
@@ -35,11 +36,11 @@ public class CommentDTO implements Serializable{
 		this.text = text;
 	}
 
-	public Instant getInstant() {
+	public Instant getDate() {
 		return date;
 	}
 
-	public void setInstant(Instant date) {
+	public void setDate(Instant date) {
 		this.date = date;
 	}
 

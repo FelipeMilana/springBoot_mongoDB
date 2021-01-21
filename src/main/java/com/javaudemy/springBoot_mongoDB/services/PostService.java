@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaudemy.springBoot_mongoDB.domain.Post;
+import com.javaudemy.springBoot_mongoDB.dto.CommentDTO;
 import com.javaudemy.springBoot_mongoDB.repositories.PostRepository;
 import com.javaudemy.springBoot_mongoDB.services.exceptions.ObjectNotFoundException;
 
@@ -43,6 +44,13 @@ public class PostService {
 		updateData(newObj, obj);
 		//save newObj updated
 		return repository.save(newObj);
+	}
+	
+	public Post addComment(String id, CommentDTO comment) {
+		Post obj = findById(id);
+		obj.getComments().add(comment);
+		return repository.save(obj);
+		
 	}
 	
 	//Query Methods

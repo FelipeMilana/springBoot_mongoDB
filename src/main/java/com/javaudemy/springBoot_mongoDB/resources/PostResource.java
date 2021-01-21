@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.javaudemy.springBoot_mongoDB.domain.Post;
+import com.javaudemy.springBoot_mongoDB.dto.CommentDTO;
 import com.javaudemy.springBoot_mongoDB.resources.utils.URL;
 import com.javaudemy.springBoot_mongoDB.services.PostService;
 import com.javaudemy.springBoot_mongoDB.services.UserService;
@@ -71,6 +72,13 @@ public class PostResource {
 		userService.updatePostList(post);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@PostMapping(value = "/addcomment/{id}")
+	public ResponseEntity<Post> insertComment(@PathVariable String id, @RequestBody CommentDTO comment){
+		comment.setDate(Instant.now());
+		Post obj = service.addComment(id, comment);
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	@DeleteMapping(value = "/{id}")
